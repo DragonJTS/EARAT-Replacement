@@ -6,7 +6,7 @@
 <?php require 'session_check.php'; ?>
 </head>
 <body>
-	<p>You are logged in as <?php echo $username?></p>
+	<p>You are logged in as <?php echo $_SESSION['username']?></p>
 	<br>
 	<a href='session_destroy.php'>Log Out</a>
 </body>

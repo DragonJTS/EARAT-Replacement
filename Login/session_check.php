@@ -12,7 +12,6 @@ else
 {
 	$_SESSION['login_error'] = "Please log in";
 	header("location:login.php");
+	exit();
 }
-
-$username=$_SESSION['username'];
 ?>
