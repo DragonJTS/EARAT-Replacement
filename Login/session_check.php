@@ -17,5 +17,5 @@ else
 $username=$_SESSION['username'];
 
 echo "You are logged in as ".$username;
-
+echo"<br><br><a href='log_out.php'>Log Out</a>";
 ?>

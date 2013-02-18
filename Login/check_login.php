@@ -23,11 +23,13 @@ while($row = mysql_fetch_assoc($results))
 	{
 		$_SESSION['login_error'] = "User does not exist";
 		header("Location:login.php");
+		exit();
 	}
 	else if ($db_pass!=$password)
 	{
 		$_SESSION['login_error'] = "Wrong Password";
 		header("Location:login.php");
+		exit();
 	}
 	else if ($db_pass=$password)
 	{
@@ -35,10 +37,12 @@ while($row = mysql_fetch_assoc($results))
 		$_SESSION['logged_in'] = true;
 		$_SESSION['username'] = $email;
 		header("Location:session_check.php");
+		exit();
 	}
 	else
 	{
 		$_SESSION['login_error'] = "Unknown error";
 		header("Location:login.php");
+		exit();
 	}
 	?>
