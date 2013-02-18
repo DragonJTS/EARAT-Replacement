@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $email = $_POST["email"];
 $password = $_POST["password"];
 $db_pass=null;
@@ -13,24 +15,30 @@ $results=mysql_query($query) or die("Can't find user: " . mysql_error());
 
 while($row = mysql_fetch_assoc($results))
 	foreach ($row as $cname => $cvalue)
-{
-	$db_pass=$cvalue;
-}
+	{
+		$db_pass=$cvalue;
+	}
 
-if ($db_pass==null)
-{
-	echo "User does not exist";
-}
-else if ($db_pass!=$password)
-{
-	echo "Wrong Password";
-}
-else if ($db_pass=$password)
-{
-	echo "Ding Ding Ding!";
-}
-else
-{
-	echo "Unknown error";
-}
-?>
+	if ($db_pass==null)
+	{
+		$_SESSION['login_error'] = "User does not exist";
+		header("Location:login.php");
+	}
+	else if ($db_pass!=$password)
+	{
+		$_SESSION['login_error'] = "Wrong Password";
+		header("Location:login.php");
+	}
+	else if ($db_pass=$password)
+	{
+		$_SESSION['login_error'] = null;
+		$_SESSION['logged_in'] = true;
+		$_SESSION['username'] = $email;
+		header("Location:session_check.php");
+	}
+	else
+	{
+		$_SESSION['login_error'] = "Unknown error";
+		header("Location:login.php");
+	}
+	?>
