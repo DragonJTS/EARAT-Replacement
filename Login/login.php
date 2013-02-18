@@ -11,7 +11,7 @@
 	{
 		if ($_SESSION['logged_in'])
 		{
-			header("location:session_check.php");
+			header("location:logged_in.php");
 		}
 	}
 	if (isset($_SESSION['login_error']))

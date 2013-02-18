@@ -36,7 +36,7 @@ while($row = mysql_fetch_assoc($results))
 		$_SESSION['login_error'] = null;
 		$_SESSION['logged_in'] = true;
 		$_SESSION['username'] = $email;
-		header("Location:session_check.php");
+		header("Location:logged_in.php");
 		exit();
 	}
 	else
