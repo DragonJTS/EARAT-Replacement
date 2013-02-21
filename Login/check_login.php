@@ -29,27 +29,29 @@ $query = "Select password from login where email = '$email'";
 $results=mysql_query($query) or die("Can't find user: " . mysql_error());//runs query
 
 /*
- * stores password as db_pass
- * assumes only one field has same email
- * should be primary key, or unique
+ * stores returned fields in $data
+ * assumes only 1 row, email should be unique
+ * By default, only stores password in array
+ * Called as $data[0]['name of column'], such as $data[0]['password']
  */
+$data[]=array();
 while($row = mysql_fetch_assoc($results))
 	foreach ($row as $cname => $cvalue)
 	{
-		$db_pass=$cvalue;
+		$data[0][$cname]=$cvalue;
 	}
 	
 	/*
 	 * If db_pass is null, means user does not exist. 
 	 * Redirect to login with error message
 	 */
-	if ($db_pass==null) //
+	if ($data[0]['password']==null) //
 	{
 		$_SESSION['login_error'] = "User does not exist";
 		header("Location:login.php");
 		exit();
 	}
-	else if ($db_pass!=$password) //if password in db does not match supplied password
+	else if ($data[0]['password']!=$password) //if password in db does not match supplied password
 	{
 		$_SESSION['login_error'] = "Wrong Password";
 		header("Location:login.php");
@@ -61,7 +63,7 @@ while($row = mysql_fetch_assoc($results))
 	 * set user as logged in
 	 * redirect to page for logged in users
 	 */
-	else if ($db_pass=$password)
+	else if ($data[0]['password']=$password)
 	{
 		$_SESSION['login_error'] = null;
 		$_SESSION['logged_in'] = true;
