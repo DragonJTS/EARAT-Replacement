@@ -1,0 +1,62 @@
+-- phpMyAdmin SQL Dump
+-- version 3.2.0.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Feb 27, 2013 at 09:30 PM
+-- Server version: 5.5.25
+-- PHP Version: 5.3.13
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `userdatabase`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `User_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `firstName` text NOT NULL,
+  `lastName` text NOT NULL,
+  `gender` int(1) NOT NULL DEFAULT '0' COMMENT '0 - not specified 1-male 2-female 3-other',
+  `emailAddress` text,
+  `institution` text NOT NULL,
+  `trade` text NOT NULL,
+  `lastAccess` datetime DEFAULT NULL,
+  `userHistory_ID` int(11) NOT NULL,
+  `country` text,
+  `dateOfBirth` date NOT NULL,
+  `role` int(11) NOT NULL COMMENT '0-user 1-admin',
+  PRIMARY KEY (`User_ID`),
+  UNIQUE KEY `UserHistory_ID` (`userHistory_ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `user`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `userhistory`
+--
+
+CREATE TABLE IF NOT EXISTS `userhistory` (
+  `userHistoryID` int(11) NOT NULL,
+  `finished` tinyint(1) NOT NULL,
+  `testID` int(11) NOT NULL,
+  `result` int(11) NOT NULL,
+  `dateCompleted` date NOT NULL,
+  PRIMARY KEY (`userHistoryID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `userhistory`
+--
+
